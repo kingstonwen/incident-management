@@ -1,4 +1,4 @@
-# Use the official Node.js v20.11.1 image
+# Use the Node.js v20.11.1 image
 FROM node:20.11.1-alpine
 
 # Set the working directory inside the container

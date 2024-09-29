@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./incident-management  # Path to backend folder
+      context: ./incident-management
     ports:
       - "8080:8080"
     networks:
@@ -14,7 +14,7 @@ services:
 
   frontend:
     build:
-      context: ./incident-management-ui  # Path to frontend folder
+      context: ./incident-management-ui 
     ports:
       - "3000:3000"
     networks:

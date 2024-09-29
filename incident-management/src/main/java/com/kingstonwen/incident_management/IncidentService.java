@@ -1,6 +1,7 @@
 package com.kingstonwen.incident_management;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ public class IncidentService {
         return incidentRepository.save(incident);
     }
 
+    @CacheEvict(value = "incidentDetails", key = "#id")
     public Incident updateIncident(Long id, String title, String description, IncidentPriority priority, IncidentStatus status) {
         Incident incident = incidentRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Incident not found with ID: " + id));
@@ -47,6 +49,7 @@ public class IncidentService {
         return incidentRepository.save(incident);
     }
 
+    @CacheEvict(value = "incidentDetails", key = "#id")
     public void deleteIncident(Long id) {
         incidentRepository.deleteById(id);
     }
@@ -59,6 +62,7 @@ public class IncidentService {
         return incidentRepository.findAll(PageRequest.of(page, size));
     }
 
+    @Cacheable("incidentDetails")
     public Incident getIncidentById(Long id) {
         return incidentRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Incident not found with ID: " + id));
