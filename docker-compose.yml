@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./incident-management  # Path to backend folder
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:testdb
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+
+  frontend:
+    build:
+      context: ./incident-management-ui  # Path to frontend folder
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:8080
+
+networks:
+  app-network:
+    driver: bridge
