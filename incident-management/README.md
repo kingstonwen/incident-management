@@ -59,3 +59,13 @@ The following environment variables can be configured:
 ```bash
 SPRING_DATASOURCE_URL: Set the Spring Boot datasource URL (H2 database).
 ```
+
+## Testing
+
+### Run Unit Tests
+
+To execute the tests, use the following command:
+
+```bash
+mvn test
+```
